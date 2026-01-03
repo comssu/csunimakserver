@@ -1,0 +1,50 @@
+{
+  "name": "csunimakserver",
+  "version": "1.0.0",
+  "description": "Server for the computer science society database at the University of Makeni.",
+  "homepage": "https://github.com/comssu/comssuserver#readme",
+  "bugs": {
+    "url": "https://github.com/comssu/comssuserver/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comssu/comssuserver.git"
+  },
+  "license": "ISC",
+  "author": "Abubakarr Marah",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --watch",
+    "dev": "nodemon dist/index.js"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/nodemailer": "^7.0.4",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.12",
+    "pg": "^8.16.3",
+    "prisma": "^7.2.0",
+    "streamifier": "^0.1.1",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/multer": "^2.0.0",
+    "@types/pg": "^8.16.0",
+    "@types/streamifier": "^0.1.2"
+  }
+}
