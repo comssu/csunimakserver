@@ -13,7 +13,7 @@ export const signin = async (req: Request, res: Response) => {
   if(!email) return res.status(400).json({ message: "Email is required!" });
   if(!password) return res.status(400).json({ message: "Password is required!" });
   const foundAdmin = await prisma.admin.findUnique({ where: { email } });
-  if(!foundAdmin) return res.status(404).json({ message: "User with email doesn't exist!" });
+  if(!foundAdmin) return res.status(404).json({ message: "Admin with email doesn't exist!" });
   const matches = await bcrypt.compare(password, foundAdmin.password!);
   if(!matches) return res.status(401).json({ message: "Password is incorrect!" });
 

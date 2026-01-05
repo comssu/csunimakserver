@@ -43,7 +43,7 @@ export const updateProfile = async (req, res) => {
     if (about)
         await prisma.student.update({ where: { id: studentId }, data: { about } });
     const updatedStudent = await prisma.student.findUnique({ where: { id: studentId } });
-    return res.status(200).json({ message: `Successfully updated ${updatedStudent?.firstname} ${updatedStudent?.lastname}!` });
+    return res.status(200).json(updatedStudent);
 };
 export const addStudent = async (req, res) => {
     const { id, firstname, lastname, level, email, about } = req.body;
