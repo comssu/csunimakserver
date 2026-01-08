@@ -4,7 +4,7 @@ import handleUpload, { deleteExistingFile } from "../config/cloudinary.js";
 
 export const updateProfile = async (req: Request, res: Response) => {
     const studentId = req.params.id;
-    const { firstname, lastname, website, github, linkedIn, password, about, level } = req.body;
+    const { firstname, lastname, website, github, linkedIn, about, level } = req.body;
     if(!studentId) return res.status(400).json({ message: "User Id is required!" });
     const foundStudent = await prisma.student.findUnique({ where: { id: studentId } });
     if(!foundStudent) return res.status(404).json({ message: "User doesn't exist!" });
@@ -40,7 +40,7 @@ export const updateProfile = async (req: Request, res: Response) => {
 
 
 export const addStudent = async (req: Request, res: Response) => {
-    const { id, firstname, lastname, level, email, about } = req.body;
+    const { id, firstname, lastname, level, email, about, website, github, linkedIn } = req.body;
     if(!firstname) return res.status(400).json({ message: "Firstname is required!!" });
     if(!lastname) return res.status(400).json({ message: "Lastname is required!!" });
     if(!level) return res.status(400).json({ message: "Level is required!!" });
@@ -64,7 +64,10 @@ export const addStudent = async (req: Request, res: Response) => {
                         level,
                         email,
                         about,
-                        id
+                        id, 
+                        website: website ?? "",
+                        github: github ?? "",
+                        linkedIn: linkedIn ?? ""
                     }
                 });
                 const newUserDetails = {

@@ -2,7 +2,7 @@ import prisma from "../config/connectDB.js";
 import handleUpload, { deleteExistingFile } from "../config/cloudinary.js";
 export const updateProfile = async (req, res) => {
     const studentId = req.params.id;
-    const { firstname, lastname, website, github, linkedIn, password, about, level } = req.body;
+    const { firstname, lastname, website, github, linkedIn, about, level } = req.body;
     if (!studentId)
         return res.status(400).json({ message: "User Id is required!" });
     const foundStudent = await prisma.student.findUnique({ where: { id: studentId } });
@@ -46,7 +46,7 @@ export const updateProfile = async (req, res) => {
     return res.status(200).json(updatedStudent);
 };
 export const addStudent = async (req, res) => {
-    const { id, firstname, lastname, level, email, about } = req.body;
+    const { id, firstname, lastname, level, email, about, website, github, linkedIn } = req.body;
     if (!firstname)
         return res.status(400).json({ message: "Firstname is required!!" });
     if (!lastname)
@@ -78,7 +78,10 @@ export const addStudent = async (req, res) => {
                         level,
                         email,
                         about,
-                        id
+                        id,
+                        website: website ?? "",
+                        github: github ?? "",
+                        linkedIn: linkedIn ?? ""
                     }
                 });
                 const newUserDetails = {
