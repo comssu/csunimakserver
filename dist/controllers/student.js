@@ -134,7 +134,7 @@ export const getStudent = async (req, res) => {
     return res.status(200).json(foundStudent);
 };
 export const getStudents = async (req, res) => {
-    const limit = Number(req.query.limit) || 10;
+    const limit = Number(req.query.limit) || 100;
     const cursor = req.query.cursor;
     const students = await prisma.student.findMany({
         take: limit + 1,
