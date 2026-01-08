@@ -132,11 +132,20 @@ export const getStudents = async (req: Request, res: Response) => {
         }
     });
 
+    const shuffle = <T>(array: T[]) => {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
     let nextCursor: string | null;
     if(students?.length > limit){
         const lastStudent = students.pop();
         nextCursor = lastStudent?.id ?? null;
     } else nextCursor = null;
 
-    return res.status(200).json({ students, nextCursor });
+    return res.status(200).json({ students: shuffle(students), nextCursor });
 }
