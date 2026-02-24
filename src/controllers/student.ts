@@ -144,3 +144,23 @@ export const getStudents = async (req: Request, res: Response) => {
 
     return res.status(200).json({ students: shuffle(students), page, hasMore: skip + students.length < count });
 }
+
+
+export const getAllStudents = async (req: Request, res: Response) => {
+    const students = await prisma.student.findMany({
+        orderBy: {
+            createdAt: "desc"
+        }
+    })
+
+    const shuffle = <T>(array: T[]) => {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    return res.status(200).json(shuffle(students));
+}
