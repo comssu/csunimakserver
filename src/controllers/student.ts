@@ -121,7 +121,7 @@ export const getStudent = async (req: Request, res: Response) => {
 export const getStudents = async (req: Request, res: Response) => {
     const take = Number(req.query.limit) || 8;
     const page = Number(req.query.page) || 1;
-    const skip = page * 8;
+    const skip = (page - 1) * 8;
     const [students, count] = await Promise.all([
         prisma.student.findMany({
             take,
@@ -133,6 +133,8 @@ export const getStudents = async (req: Request, res: Response) => {
         prisma.student.count()
     ]) 
 
+    console.log(count);
+
     const shuffle = <T>(array: T[]) => {
         const arr = [...array];
         for (let i = arr.length - 1; i > 0; i--) {
@@ -142,7 +144,7 @@ export const getStudents = async (req: Request, res: Response) => {
         return arr;
     }
 
-    return res.status(200).json({ students: shuffle(students), page, hasMore: skip + students.length < count });
+    return res.status(200).json({ students: shuffle(students), page, hasMore: (skip + students.length) < count });
 }
 
 
